@@ -1,0 +1,19 @@
+[Unit]
+Description=Pihole service
+After=network.target auditd.service
+
+[Service]
+WorkingDirectory=/opt/pihole
+ExecStart=docker-compose up
+ExecStop=docker-compose stop
+ExecReload=docker-compose restart
+KillMode=process
+Restart=always
+RestartSec=5
+RuntimeMaxSec=604800
+RestartPreventExitStatus=255
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
+Alias=pihole.service
